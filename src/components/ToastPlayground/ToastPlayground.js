@@ -36,7 +36,7 @@ function ToastPlayground() {
 
     return (
         <div className={styles.wrapper}>
-            {console.log('return toastData: ', toastData)}
+            {console.log({ toastData })}
             <header>
                 <img alt='Cute toast mascot' src='/toast.png' />
                 <h1>Toast Playground</h1>
