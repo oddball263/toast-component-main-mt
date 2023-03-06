@@ -1,7 +1,7 @@
 import React from 'react'
 import { X } from 'react-feather'
-
 import VisuallyHidden from '../VisuallyHidden'
+import { ToastContext } from '../ToastProvider'
 
 import styles from './Toast.module.css'
 
@@ -21,7 +21,9 @@ import styles from './Toast.module.css'
 
 */
 
-function Toast({ icon, variant, id, children, handleShowBanner }) {
+function Toast({ icon, variant, id, children }) {
+    const { removeBanner } = React.useContext(ToastContext)
+
     const clonedIcon = React.cloneElement(icon, {
         size: icon.props?.size > 24 ? 24 : icon.props?.size,
     })
@@ -33,7 +35,7 @@ function Toast({ icon, variant, id, children, handleShowBanner }) {
             <p className={styles.content}>{children}</p>
 
             <button className={styles.closeButton}>
-                <X size={24} onClick={() => handleShowBanner(id)} />
+                <X size={24} onClick={() => removeBanner(id)} />
                 <VisuallyHidden>Dismiss message</VisuallyHidden>
             </button>
         </div>

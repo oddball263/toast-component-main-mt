@@ -3,7 +3,7 @@ import Button from '../Button'
 import ToastShelf from '../ToastShelf'
 import styles from './ToastPlayground.module.css'
 import { AlertOctagon, AlertTriangle, CheckCircle, Info } from 'react-feather'
-//import ToastProvider, { ToastContext } from '../ToastProvider'
+import { ToastContext } from '../ToastProvider/ToastProvider'
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 const ICONS_BY_VARIANT = {
@@ -14,33 +14,22 @@ const ICONS_BY_VARIANT = {
 }
 
 function ToastPlayground() {
-    //const { toastData, setToastData } = React.useContext(ToastContext)
+    const { toastData, setToastData } = React.useContext(ToastContext)
 
     const [selectedVariant, setSlectedVariant] = React.useState('notice')
     const [message, setMessage] = React.useState('')
-    const [toastData, setToastData] = React.useState([])
-
-    const removeBanner = id => {
-        console.log({ toastData, id: id })
-
-        const filtredToastData = toastData.filter(d => d.id !== id)
-        setToastData(filtredToastData)
-    }
 
     const handleSubmit = e => {
         e.preventDefault()
-        const uuid = crypto.randomUUID()
 
         const newToast = {
-            id: uuid,
+            id: crypto.randomUUID(),
             icon: ICONS_BY_VARIANT[selectedVariant],
             variant: selectedVariant,
-            message: message + ' ' + uuid,
+            message: message,
         }
-        console.log({ toastData, newToast })
-        const newToastData = [...toastData, newToast]
-        console.log({ newToastData })
-        setToastData(newToastData)
+
+        setToastData([...toastData, newToast])
         setMessage('')
         setSlectedVariant('notice')
     }
@@ -53,7 +42,7 @@ function ToastPlayground() {
                 <h1>Toast Playground</h1>
             </header>
 
-            <ToastShelf toastData={toastData} handleShowBanner={removeBanner} />
+            <ToastShelf toastData={toastData} />
 
             <div className={styles.controlsWrapper}>
                 <form onSubmit={handleSubmit}>

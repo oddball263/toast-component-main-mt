@@ -3,13 +3,12 @@ import React from 'react'
 import Toast from '../Toast'
 import styles from './ToastShelf.module.css'
 
-function ToastShelf({ toastData, handleShowBanner }) {
+function ToastShelf({ toastData }) {
     /*
         <Toast
             id=''
             icon={ICONS_BY_VARIANT[selectedVariant]} //{<Info />}
             variant={selectedVariant}
-            handleShowBanner={setShowBanner}
         >
             {message}
         </Toast>
@@ -22,12 +21,7 @@ function ToastShelf({ toastData, handleShowBanner }) {
         <ol className={styles.wrapper}>
             {toastData.map(({ id, icon, variant, message }) => (
                 <li key={id} className={styles.toastWrapper}>
-                    <Toast
-                        icon={icon}
-                        variant={variant}
-                        handleShowBanner={handleShowBanner}
-                        id={id}
-                    >
+                    <Toast icon={icon} variant={variant} id={id}>
                         {message}
                     </Toast>
                 </li>
