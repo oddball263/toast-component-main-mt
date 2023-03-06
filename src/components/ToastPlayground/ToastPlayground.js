@@ -28,7 +28,6 @@ function ToastPlayground() {
             variant: selectedVariant,
             message: message,
         }
-
         setToastData([...toastData, newToast])
         setMessage('')
         setSlectedVariant('notice')

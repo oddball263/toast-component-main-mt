@@ -17,6 +17,23 @@ function ToastProvider({ children }) {
         return { toastData, setToastData, removeBanner }
     }, [toastData, removeBanner])
 
+    React.useEffect(() => {
+        function checkEscape(e) {
+            if (e.key === 'Escape') {
+                if (toastData.length > 0) {
+                    console.log(e.key + ' pressed.')
+                    setToastData([])
+                }
+            }
+        }
+
+        window.addEventListener('keydown', checkEscape)
+
+        return () => {
+            window.removeEventListener('keydown', checkEscape)
+        }
+    })
+
     return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
 }
 
