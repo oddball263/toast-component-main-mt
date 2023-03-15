@@ -1,7 +1,7 @@
 import React from 'react'
 import { X } from 'react-feather'
 import { ToastContext } from '../ToastProvider'
-
+import VisuallyHidden from '../VisuallyHidden'
 import styles from './Toast.module.css'
 
 /* 
@@ -30,17 +30,16 @@ function Toast({ icon, variant, id, children }) {
     return (
         <div className={`${styles.toast} ${styles[variant]}`}>
             <div className={styles.iconContainer}>{clonedIcon}</div>
+            <VisuallyHidden>{`${variant} message`}</VisuallyHidden>
 
-            <p className={styles.content}>
-                <span className='VisuallyHidden_wrapper'>{variant}</span>
-                {children}
-            </p>
+            <p className={styles.content}>{children}</p>
 
             <button
                 className={styles.closeButton}
                 aria-label='Dismiss message'
                 aria-live='off'
             >
+                <VisuallyHidden>{`Dismiss ${variant} message`}</VisuallyHidden>
                 <X size={24} onClick={() => removeBanner(id)} />
             </button>
         </div>
